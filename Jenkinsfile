@@ -9,14 +9,14 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker image...'
-                bat 'docker build -t devops-lab-project:latest .'
+                echo 'Building Docker image inside Minikube...'
+                bat 'wsl minikube image build -t devops-lab-project:latest .'
             }
         }
         stage('Deploy to K8s') {
             steps {
                 echo 'Deploying to Minikube...'
-                bat 'kubectl apply -f k8s-deploy.yaml'
+                bat 'wsl kubectl apply -f k8s-deploy.yaml'
             }
         }
     }
